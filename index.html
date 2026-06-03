@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PostureCheck</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+    <div class="logo">
+      <span class="logo-icon">⬡</span>
+      <span class="logo-text">PostureCheck</span>
+    </div>
+    <p class="tagline">Monitor postur duduk kamu secara real-time</p>
+  </header>
+
+  <!-- ===== MAIN APP ===== -->
+  <main class="app-layout">
+
+    <!-- Kolom kiri: kamera -->
+    <section class="camera-section">
+      <div class="camera-wrap" id="cameraWrap">
+
+        <!-- Video dari kamera -->
+        <video id="videoEl" playsinline autoplay muted></video>
+
+        <!-- Canvas untuk overlay pose landmarks -->
+        <canvas id="canvasEl"></canvas>
+
+        <!-- Overlay saat kamera belum aktif -->
+        <div class="camera-placeholder" id="cameraPlaceholder">
+          <div class="placeholder-icon">◉</div>
+          <p>Kamera belum aktif</p>
+          <span>Tekan tombol di bawah untuk mulai</span>
+        </div>
+
+        <!-- Badge status di atas kamera -->
+        <div class="camera-badge" id="cameraBadge" style="display:none;">
+          <span class="badge-dot" id="badgeDot"></span>
+          <span id="badgeText">Mendeteksi...</span>
+        </div>
+
+      </div>
+
+      <!-- Tombol kontrol kamera -->
+      <div class="camera-controls">
+        <button class="btn-primary" id="btnStart">
+          <span class="btn-icon">▶</span> Mulai Kamera
+        </button>
+        <button class="btn-secondary" id="btnStop" disabled>
+          <span class="btn-icon">■</span> Hentikan
+        </button>
+      </div>
+    </section>
+
+    <!-- Kolom kanan: panel status -->
+    <aside class="status-panel">
+
+      <!-- Skor postur -->
+      <div class="card card-score">
+        <div class="card-label">Skor Postur</div>
+        <div class="score-display">
+          <span class="score-number" id="scoreNumber">—</span>
+          <span class="score-unit">/100</span>
+        </div>
+        <div class="score-bar-track">
+          <div class="score-bar-fill" id="scoreBarFill"></div>
+        </div>
+        <div class="score-status" id="scoreStatus">Aktifkan kamera untuk mulai</div>
+      </div>
+
+      <!-- Detail metrik -->
+      <div class="card card-metrics">
+        <div class="card-label">Detail Deteksi</div>
+        <ul class="metric-list">
+          <li class="metric-item">
+            <span class="metric-name">Kepala</span>
+            <span class="metric-badge" id="mHead">—</span>
+          </li>
+          <li class="metric-item">
+            <span class="metric-name">Bahu</span>
+            <span class="metric-badge" id="mShoulder">—</span>
+          </li>
+          <li class="metric-item">
+            <span class="metric-name">Jarak Layar</span>
+            <span class="metric-badge" id="mDist">—</span>
+          </li>
+          <li class="metric-item">
+            <span class="metric-name">Posisi Badan</span>
+            <span class="metric-badge" id="mTilt">—</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Tips -->
+      <div class="card card-tip">
+        <div class="card-label">💡 Tips</div>
+        <p class="tip-text" id="tipText">
+          Aktifkan kamera, lalu duduk dalam posisi normal. Pastikan kepala dan bahu terlihat kamera.
+        </p>
+      </div>
+
+      <!-- Statistik sesi -->
+      <div class="card card-stats">
+        <div class="card-label">Sesi Ini</div>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <span class="stat-value" id="statDuration">0:00</span>
+            <span class="stat-label">Durasi</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value good" id="statGood">0%</span>
+            <span class="stat-label">Postur Baik</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value bad" id="statBad">0%</span>
+            <span class="stat-label">Postur Buruk</span>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+  </main>
+
+  <!-- ===== SCRIPTS ===== -->
+  <!-- MediaPipe libraries (CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose/pose.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+
+  <!-- App scripts -->
+  <script src="pose.js"></script>
+  <script src="app.js"></script>
+
+</body>
+</html>
