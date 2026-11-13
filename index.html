@@ -53,7 +53,14 @@
         <button class="btn-secondary" id="btnStop" disabled>
           <span class="btn-icon">■</span> Hentikan
         </button>
+        <!-- Jendela mengambang: tetap terlihat saat pindah tab/aplikasi -->
+        <button class="btn-secondary btn-float" id="btnFloat" disabled>
+          <span class="btn-icon">⧉</span> <span id="btnFloatLabel">Jendela Mengambang</span>
+        </button>
       </div>
+      <p class="float-hint" id="floatHint">
+        Jendela kecil berisi kamera dan skor yang tetap di atas aplikasi lain. Muncul otomatis saat pindah tab, atau tekan tombol di atas sebelum pindah aplikasi.
+      </p>
     </section>
 
     <!-- Kolom kanan: panel status -->
@@ -128,7 +135,6 @@
   <!-- ===== SCRIPTS ===== -->
   <!-- MediaPipe libraries (CDN) -->
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose/pose.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
 
   <!-- App scripts -->
